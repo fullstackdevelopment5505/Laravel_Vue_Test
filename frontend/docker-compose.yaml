@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/dockerfile
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+
+  nigix:
+    build:
+      context: .
+      dockerfile: docker/dockerfile.nginx
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - "app"
+    ports:
+      - 8080:8080

@@ -1,0 +1,7 @@
+FROM node:11.1-alpine as develop-stage
+WORKDIR /var/www/
+COPY package*.json ./
+RUN yarn install
+COPY . .
+# build stage
+RUN yarn build
